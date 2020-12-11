@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CleanArch.Repositories.Repository
 {
-    interface IRepository
+    public interface IRepository
     {
         List<T> GetAll<T>(bool withTracking = false) where T : class;
 

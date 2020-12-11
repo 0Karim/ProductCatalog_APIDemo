@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CleanArch.Models\CleanArch.Models.csproj" />
+    <ProjectReference Include="..\CleanArch.Repositories\CleanArch.Repositories.csproj" />
+  </ItemGroup>
+
+</Project>

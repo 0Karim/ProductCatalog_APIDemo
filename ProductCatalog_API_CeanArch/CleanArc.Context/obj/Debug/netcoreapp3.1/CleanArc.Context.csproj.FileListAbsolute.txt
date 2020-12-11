@@ -1,8 +1,15 @@
 G:\EVision Task\ProductCatalog_API_CeanArch\CleanArc.Context\bin\Debug\netcoreapp3.1\CleanArc.Context.deps.json
+G:\EVision Task\ProductCatalog_API_CeanArch\CleanArc.Context\bin\Debug\netcoreapp3.1\CleanArc.Context.runtimeconfig.json
+G:\EVision Task\ProductCatalog_API_CeanArch\CleanArc.Context\bin\Debug\netcoreapp3.1\CleanArc.Context.runtimeconfig.dev.json
 G:\EVision Task\ProductCatalog_API_CeanArch\CleanArc.Context\bin\Debug\netcoreapp3.1\CleanArc.Context.dll
+G:\EVision Task\ProductCatalog_API_CeanArch\CleanArc.Context\bin\Debug\netcoreapp3.1\CleanArc.Context.pdb
+G:\EVision Task\ProductCatalog_API_CeanArch\CleanArc.Context\bin\Debug\netcoreapp3.1\CleanArch.Models.dll
+G:\EVision Task\ProductCatalog_API_CeanArch\CleanArc.Context\bin\Debug\netcoreapp3.1\CleanArch.Models.pdb
 G:\EVision Task\ProductCatalog_API_CeanArch\CleanArc.Context\obj\Debug\netcoreapp3.1\CleanArc.Context.csprojAssemblyReference.cache
 G:\EVision Task\ProductCatalog_API_CeanArch\CleanArc.Context\obj\Debug\netcoreapp3.1\CleanArc.Context.AssemblyInfoInputs.cache
 G:\EVision Task\ProductCatalog_API_CeanArch\CleanArc.Context\obj\Debug\netcoreapp3.1\CleanArc.Context.AssemblyInfo.cs
-G:\EVision Task\ProductCatalog_API_CeanArch\CleanArc.Context\bin\Debug\netcoreapp3.1\CleanArc.Context.runtimeconfig.json
-G:\EVision Task\ProductCatalog_API_CeanArch\CleanArc.Context\bin\Debug\netcoreapp3.1\CleanArc.Context.runtimeconfig.dev.json
+G:\EVision Task\ProductCatalog_API_CeanArch\CleanArc.Context\obj\Debug\netcoreapp3.1\CleanArc.Context.csproj.CoreCompileInputs.cache
+G:\EVision Task\ProductCatalog_API_CeanArch\CleanArc.Context\obj\Debug\netcoreapp3.1\CleanArc.Context.csproj.CopyComplete
+G:\EVision Task\ProductCatalog_API_CeanArch\CleanArc.Context\obj\Debug\netcoreapp3.1\CleanArc.Context.dll
+G:\EVision Task\ProductCatalog_API_CeanArch\CleanArc.Context\obj\Debug\netcoreapp3.1\CleanArc.Context.pdb
 G:\EVision Task\ProductCatalog_API_CeanArch\CleanArc.Context\obj\Debug\netcoreapp3.1\CleanArc.Context.genruntimeconfig.cache
