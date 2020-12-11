@@ -1,0 +1,4 @@
+G:\EVision Task\ProductCatalog_API_CeanArch\CleanArch.Repositories\bin\Debug\netcoreapp3.1\CleanArc.Context.dll
+G:\EVision Task\ProductCatalog_API_CeanArch\CleanArch.Repositories\bin\Debug\netcoreapp3.1\CleanArch.Models.dll
+G:\EVision Task\ProductCatalog_API_CeanArch\CleanArch.Repositories\obj\Debug\netcoreapp3.1\CleanArch.Repositories.AssemblyInfoInputs.cache
+G:\EVision Task\ProductCatalog_API_CeanArch\CleanArch.Repositories\obj\Debug\netcoreapp3.1\CleanArch.Repositories.AssemblyInfo.cs
