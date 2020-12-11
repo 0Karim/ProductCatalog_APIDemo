@@ -14,9 +14,10 @@ namespace CleanArch.Services.Services
         private readonly IRepository repository;
         private readonly ILogger logger;
 
-        public ProductService(IRepository _repository)
+        public ProductService(IRepository _repository, ILogger _logger)
         {
             repository = _repository;
+            logger = _logger;
         }
 
         public bool Add(Product product)
