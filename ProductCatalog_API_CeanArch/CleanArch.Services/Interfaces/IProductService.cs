@@ -7,8 +7,9 @@ namespace CleanArch.Services.Interfaces
 {
     public interface IProductService
     {
-
-        ICollection<Product> Search(string name, double? price , DateTime? lastUpdate);
+        //int GetTotalCount(string name, double? price, DateTime? lastUpdate);
+        
+        ICollection<Product> Search(int skip, int take, string name, double? price , DateTime? lastUpdate);
 
         bool Add(Product product);
 

@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using CleanArch.Web.Models;
+using System.Net.Http;
+using Newtonsoft.Json;
+using CleanArch.Models.Entities;
+using X.PagedList;
 
 namespace CleanArch.Web.Controllers
 {
@@ -18,7 +22,32 @@ namespace CleanArch.Web.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index(int page = 1, string name="", double? price = null , DateTime? lastUpdate = null, int? pageSize = 10)
+        {
+            ProductViewModel product = new ProductViewModel();
+            using (var httpClient = new HttpClient())
+            {
+                var x = string.Format("https://localhost:44331/api/product/search?name={0}&price={1}&lastUpdate={2}&start={3}&length={4}"
+                    , name, price, lastUpdate, page, pageSize);
+                using (var response = await httpClient.GetAsync(x))
+                {
+                    if (response.IsSuccessStatusCode)
+                    {
+                        string apiResponse = await response.Content.ReadAsStringAsync();
+                        product.Products = (JsonConvert.DeserializeObject<List<Product>>(apiResponse)).ToPagedList(page, pageSize.Value);
+                    }
+                }
+            }
+            return View(product);
+        }
+
+        [HttpGet]
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        public ActionResult Edit()
         {
             return View();
         }

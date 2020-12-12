@@ -1,5 +1,6 @@
 ﻿using CleanArch.Models.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Design;
 using System;
 
 namespace CleanArc.Context
@@ -50,6 +51,18 @@ namespace CleanArc.Context
                 );
 
             base.OnModelCreating(modelBuilder);
+        }
+
+        public class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<CleanArchDBContext>
+        {
+            public CleanArchDBContext CreateDbContext(string[] args)
+            {
+
+                var builder = new DbContextOptionsBuilder<CleanArchDBContext>();
+                var connectionString = "Server=localhost;Database=IODB;Trusted_Connection=True;MultipleActiveResultSets=true";
+                builder.UseSqlServer(connectionString);
+                return new CleanArchDBContext(builder.Options);
+            }
         }
     }
 }

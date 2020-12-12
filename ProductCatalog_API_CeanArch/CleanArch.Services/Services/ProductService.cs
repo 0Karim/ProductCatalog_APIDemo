@@ -60,7 +60,7 @@ namespace CleanArch.Services.Services
             return repository.GetAllWhereQ<Product>(p => p.Id == id).FirstOrDefault();
         }
 
-        public ICollection<Product> Search(string name, double? price = null, DateTime? lastUpdate = null)
+        public ICollection<Product> Search(int skip, int take ,string name, double? price = null, DateTime? lastUpdate = null)
         {
             try
             {
@@ -70,7 +70,7 @@ namespace CleanArch.Services.Services
                     (p => (string.IsNullOrEmpty(nameToLower) || p.Name.ToLower().Contains(nameToLower)) &&
                           (price == null || p.Price == price) &&
                           (lastUpdate == null || (lastUpdate.Value >= p.LastUpdate))
-                    ).ToList();
+                    ).Skip(skip - 1).Take(take).ToList();
 
                 return productsList;
             }
