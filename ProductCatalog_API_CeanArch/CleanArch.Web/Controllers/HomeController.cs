@@ -21,15 +21,10 @@ namespace CleanArch.Web.Controllers
 {
     public class HomeController : Controller
     {
-        //private readonly ILogger<HomeController> _logger;
-
-        //ILogger<HomeController> logger
-
         private readonly IWebHostEnvironment _hostEnvironment;
 
         public HomeController(IWebHostEnvironment hostEnvironment)
         {
-            //_logger = logger;
             _hostEnvironment = hostEnvironment;
         }
 
