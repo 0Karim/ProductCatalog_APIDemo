@@ -18,6 +18,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace CleanArc.API
 {
@@ -33,20 +34,33 @@ namespace CleanArc.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            #region Configure Database
+
             services.AddDbContext<CleanArchDBContext>(options =>
             {
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
 
+            #endregion
 
             services.AddControllers();
+
+            #region Register Services
 
             services.AddTransient<IRepository, Repository>();
             services.AddTransient<IProductService, ProductService>();
 
+            #endregion
+
+            #region Logger
+
             var serviceProvider = services.BuildServiceProvider();
             var logger = serviceProvider.GetService<ILogger<Product>>();
             services.AddSingleton(typeof(ILogger), logger);
+
+            #endregion
+
+            #region Auto Mapper Config
 
             // Auto Mapper Configurations
             var mapperConfig = new MapperConfiguration(mc =>
@@ -56,6 +70,30 @@ namespace CleanArc.API
 
             IMapper mapper = mapperConfig.CreateMapper();
             services.AddSingleton(mapper);
+
+            #endregion
+
+            #region Configure Swagger
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
+                {
+                    Version = "v1",
+                    Title = "Swagger Demo",
+                    Description = "Swagger Demo for ProductController",
+                    TermsOfService = new Uri("https://localhost:44331/api/product"),
+                    Contact = new Microsoft.OpenApi.Models.OpenApiContact()
+                    {
+                        Name = "Karim Alaa",
+                        Email = "karimalaa298@gmail.com",
+                        Url = new Uri("https://localhost:44331/api/product"),
+                    }
+                });
+            });
+
+
+            #endregion
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -75,6 +113,12 @@ namespace CleanArc.API
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+            });
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
             });
         }
     }

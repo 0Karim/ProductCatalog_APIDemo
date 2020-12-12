@@ -26,6 +26,15 @@ namespace CleanArc.API.Controllers
             _mapper = mapper;
         }
 
+        /// <summary>
+        /// Search action method that accept name as string , price as nullable double , lastUpdate as nullabel date , start as int and pageSize as int
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="price"></param>
+        /// <param name="lastUpdate"></param>
+        /// <param name="start"></param>
+        /// <param name="pageSize"></param>
+        /// <returns></returns>
         [HttpGet("search")]
         public ActionResult<ICollection<ProductModel>> Get([FromQuery] string name , [FromQuery] double? price , [FromQuery] DateTime? lastUpdate , [FromQuery] int start , [FromQuery] int length)
         {
@@ -41,6 +50,12 @@ namespace CleanArc.API.Controllers
         }
 
 
+
+        /// <summary>
+        /// GetById action method that accept Id as Integer
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
         [HttpGet("GetById")]
         public ActionResult<ICollection<ProductModel>> Get([FromQuery] int Id)
         {
@@ -64,6 +79,11 @@ namespace CleanArc.API.Controllers
         }
 
 
+        /// <summary>
+        /// add product action method that accept product as ProductDto
+        /// </summary>
+        /// <param name="product"></param>
+        /// <returns></returns>
         [HttpPost("add")]
         public IActionResult Post(ProductDto product)
         {
@@ -85,7 +105,11 @@ namespace CleanArc.API.Controllers
             }
         }
 
-
+        /// <summary>
+        /// update product action method that accept product as ProductDto
+        /// </summary>
+        /// <param name="product"></param>
+        /// <returns></returns>
         [HttpPut("update")]
         public IActionResult Put(ProductDto product)
         {
@@ -111,6 +135,11 @@ namespace CleanArc.API.Controllers
             }
         }
 
+        /// <summary>
+        /// delete product action method that accept Id as ProductDto
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
         [HttpDelete("delete")]
         public IActionResult Delete(int Id)
         {
