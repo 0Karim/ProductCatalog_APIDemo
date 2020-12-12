@@ -69,7 +69,7 @@ namespace CleanArc.API.Controllers
 
 
         [HttpPost("add")]
-        public ActionResult<IActionResult> Post(ProductDto product)
+        public IActionResult Post(ProductDto product)
         {
             try
             {
@@ -94,7 +94,7 @@ namespace CleanArc.API.Controllers
 
 
         [HttpPut("update")]
-        public ActionResult<IActionResult> Put(ProductDto product)
+        public IActionResult Put(ProductDto product)
         {
             try
             {
@@ -119,7 +119,7 @@ namespace CleanArc.API.Controllers
         }
 
         [HttpDelete("delete")]
-        public ActionResult<IActionResult> Delete(int Id)
+        public IActionResult Delete(int Id)
         {
             try
             {

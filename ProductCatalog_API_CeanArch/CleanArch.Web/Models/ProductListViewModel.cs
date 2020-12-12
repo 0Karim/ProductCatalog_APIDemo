@@ -1,4 +1,5 @@
-﻿using CleanArch.Models.Entities;
+﻿using CleanArch.Common.Helper;
+using CleanArch.Models.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,8 +15,12 @@ namespace CleanArch.Web.Models
 
         public string Name { get; set; }
 
-        public double Price { get; set; }
+        public double? Price { get; set; }
 
-        public DateTime LastUpdate { get; set; }
+        public string Photo { get; set; }
+
+        public string RootPath { get; set; } = Constants.ProductUploadDirectory.Replace('/', '\\');
+
+        public DateTime? LastUpdate { get; set; }
     }
 }

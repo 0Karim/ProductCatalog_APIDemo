@@ -57,3 +57,5 @@ G:\EVision Task\ProductCatalog_API_CeanArch\CleanArc.API\obj\Debug\netcoreapp3.1
 G:\EVision Task\ProductCatalog_API_CeanArch\CleanArc.API\obj\Debug\netcoreapp3.1\CleanArc.API.dll
 G:\EVision Task\ProductCatalog_API_CeanArch\CleanArc.API\obj\Debug\netcoreapp3.1\CleanArc.API.pdb
 G:\EVision Task\ProductCatalog_API_CeanArch\CleanArc.API\obj\Debug\netcoreapp3.1\CleanArc.API.genruntimeconfig.cache
+G:\EVision Task\ProductCatalog_API_CeanArch\CleanArc.API\bin\Debug\netcoreapp3.1\CleanArch.Common.dll
+G:\EVision Task\ProductCatalog_API_CeanArch\CleanArc.API\bin\Debug\netcoreapp3.1\CleanArch.Common.pdb

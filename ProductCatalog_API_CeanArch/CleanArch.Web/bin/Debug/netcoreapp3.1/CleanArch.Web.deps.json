@@ -24,6 +24,7 @@
     ".NETCoreApp,Version=v3.1": {
       "CleanArch.Web/1.0.0": {
         "dependencies": {
+          "CleanArch.Common": "1.0.0",
           "CleanArch.Models": "1.0.0",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "3.1.4",
           "X.PagedList.Mvc.Core": "8.0.7",
@@ -1896,6 +1897,14 @@
         },
         "compile": {
           "lib/netstandard2.0/X.PagedList.Web.Common.dll": {}
+        }
+      },
+      "CleanArch.Common/1.0.0": {
+        "runtime": {
+          "CleanArch.Common.dll": {}
+        },
+        "compile": {
+          "CleanArch.Common.dll": {}
         }
       },
       "CleanArch.Models/1.0.0": {
@@ -4711,6 +4720,11 @@
       "sha512": "sha512-h03M+ZeaucubfLPlaKoFB/rxBxV17pddp3FVjwKO0QM47frt+QIIABHs2KB3Eay9Xc/sDPGvKkYsm0ZdUpF/lg==",
       "path": "x.pagedlist.web.common/8.0.7",
       "hashPath": "x.pagedlist.web.common.8.0.7.nupkg.sha512"
+    },
+    "CleanArch.Common/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     },
     "CleanArch.Models/1.0.0": {
       "type": "project",

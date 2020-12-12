@@ -70,7 +70,7 @@ namespace CleanArch.Services.Services
                     (p => (string.IsNullOrEmpty(nameToLower) || p.Name.ToLower().Contains(nameToLower)) &&
                           (price == null || p.Price == price) &&
                           (lastUpdate == null || (lastUpdate.Value >= p.LastUpdate))
-                    ).Skip(skip - 1).Take(take).ToList();
+                    ).ToList();
 
                 return productsList;
             }

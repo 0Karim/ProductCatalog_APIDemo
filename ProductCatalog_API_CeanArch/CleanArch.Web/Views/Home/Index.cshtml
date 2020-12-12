@@ -5,6 +5,16 @@
     ViewData["Title"] = "Home Page";
 }
 
+<style>
+    .img-margin {
+/*        margin-top: 12px*/
+    }
+
+    .img-size {
+        height: 150px;
+        width: 150px;
+    }
+</style>
 
 <div class="kt-portlet kt-portlet--mobile">
     <div class="kt-portlet__head kt-portlet__head--lg">
@@ -69,10 +79,10 @@
                                 <tr>
                                     <td>@item.Name</td>
                                     <td>
-                                        <img src="" class="" alt="img" />
+                                        <img src="@(Model.RootPath + Model.Photo)" class="img-thumbnail center img-margin img-size" alt="@Model.Photo" />
                                     </td>
                                     <td>@item.Price</td>
-                                    <td>@item.LastUpdate</td>
+                                    <td>@item.LastUpdate.ToString("dd/MM/yyyy")</td>
                                     <td>
                                         <a href="@Url.Content($"~/Home/Edit/{item.Id}")" class="btn btn-sm btn-success btn-icon btn-icon-md">
                                             Edit
@@ -99,7 +109,7 @@
                 <div class="kt-pagination  kt-pagination--brand">
 
                     <div data-target="#divList">
-                        @Html.PagedListPager(Model.Products, page => Url.Action("Index", "Home", new { page = page, name = Model.Name, price = Model.Price, lastUpdate = Model.LastUpdate }))
+                        @Html.PagedListPager(Model.Products, page => Url.Action("Index", "Home", new { page = page, name = Model.Name , price = Model.Price , lastUpdate = Model.LastUpdate }))
                     </div>
                 </div>
             }

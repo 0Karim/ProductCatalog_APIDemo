@@ -1,0 +1,9 @@
+G:\EVision Task\ProductCatalog_API_CeanArch\CleanArch.Common\bin\Debug\netcoreapp3.1\CleanArch.Common.deps.json
+G:\EVision Task\ProductCatalog_API_CeanArch\CleanArch.Common\bin\Debug\netcoreapp3.1\CleanArch.Common.dll
+G:\EVision Task\ProductCatalog_API_CeanArch\CleanArch.Common\bin\Debug\netcoreapp3.1\CleanArch.Common.pdb
+G:\EVision Task\ProductCatalog_API_CeanArch\CleanArch.Common\obj\Debug\netcoreapp3.1\CleanArch.Common.csprojAssemblyReference.cache
+G:\EVision Task\ProductCatalog_API_CeanArch\CleanArch.Common\obj\Debug\netcoreapp3.1\CleanArch.Common.AssemblyInfoInputs.cache
+G:\EVision Task\ProductCatalog_API_CeanArch\CleanArch.Common\obj\Debug\netcoreapp3.1\CleanArch.Common.AssemblyInfo.cs
+G:\EVision Task\ProductCatalog_API_CeanArch\CleanArch.Common\obj\Debug\netcoreapp3.1\CleanArch.Common.csproj.CoreCompileInputs.cache
+G:\EVision Task\ProductCatalog_API_CeanArch\CleanArch.Common\obj\Debug\netcoreapp3.1\CleanArch.Common.dll
+G:\EVision Task\ProductCatalog_API_CeanArch\CleanArch.Common\obj\Debug\netcoreapp3.1\CleanArch.Common.pdb

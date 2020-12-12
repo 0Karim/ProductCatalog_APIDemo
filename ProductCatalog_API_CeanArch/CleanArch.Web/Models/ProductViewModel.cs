@@ -9,12 +9,12 @@ namespace CleanArch.Web.Models
     {
         public int Id { get; set; }
 
-        [Required(ErrorMessage ="Required Field"]
+        [Required(ErrorMessage ="Required Field")]
         public string Name { get; set; }
 
         public string Photo { get; set; }
 
-        [Required(ErrorMessage = "Required Field"]
+        [Required(ErrorMessage = "Required Field")]
         public double Price { get; set; }
 
         public DateTime LastUpdate { get; set; }

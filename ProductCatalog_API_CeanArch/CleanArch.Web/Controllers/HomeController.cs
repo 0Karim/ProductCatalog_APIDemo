@@ -12,26 +12,35 @@ using CleanArch.Models.Entities;
 using X.PagedList;
 using CleanArch.Common.Dtos;
 using System.Text;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Hosting;
+using SysIO = System.IO;
+using CleanArch.Common.Helper;
 
 namespace CleanArch.Web.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        //private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        //ILogger<HomeController> logger
+
+        private readonly IWebHostEnvironment _hostEnvironment;
+
+        public HomeController(IWebHostEnvironment hostEnvironment)
         {
-            _logger = logger;
+            //_logger = logger;
+            _hostEnvironment = hostEnvironment;
         }
 
-        public async Task<IActionResult> Index(int page = 1, string name="", double? price = null , DateTime? lastUpdate = null, int? pageSize = 10)
+        public async Task<IActionResult> Index(int page = 1, string name="", double? price = null , DateTime? lastUpdate = null, int? pageSize = Constants.PageSize)
         {
             ProductListViewModel product = new ProductListViewModel();
             try
             {
                 using (var httpClient = new HttpClient())
                 {
-                    var url = string.Format("https://localhost:44331/api/product/search?name={0}&price={1}&lastUpdate={2}&start={3}&length={4}"
+                    var url = string.Format(Constants.BaseUrl + "/search?name={0}&price={1}&lastUpdate={2}&start={3}&length={4}"
                         , name, price, lastUpdate, page, pageSize);
                     using (var response = await httpClient.GetAsync(url))
                     {
@@ -57,9 +66,34 @@ namespace CleanArch.Web.Controllers
         }
 
         [HttpGet]
-        public ActionResult Edit(int Id)
+        public async Task<IActionResult> Edit(int Id)
         {
-            return View();
+            var product = new ProductViewModel();
+            try
+            {
+                using (var httpClient = new HttpClient())
+                {
+                    var url = string.Format(Constants.BaseUrl + "/GetById?Id={0}", Id);
+                    using (var response = await httpClient.GetAsync(url))
+                    {
+                        if (response.IsSuccessStatusCode)
+                        {
+                            string apiResponse = await response.Content.ReadAsStringAsync();
+                            var dto = (JsonConvert.DeserializeObject<ProductDto>(apiResponse));
+                            product.Name = dto.Name;
+                            product.Photo = dto.Photo;
+                            product.Price = dto.Price;
+                            product.LastUpdate = dto.LastUpdate;
+                            product.Id = dto.Id;
+                        }
+                    }
+                }
+                return View(product);
+            }
+            catch(Exception ex)
+            {
+                return View(product);
+            }
         }
 
         [HttpPost]
@@ -70,23 +104,26 @@ namespace CleanArch.Web.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    var productDto = new ProductDto();
                     if (model.Id == 0)
                     {
+
+                        if (Request.Form.Files?.Count > 0)
+                        {
+                            model.Photo = await SaveFile(Request.Form.Files["photo"]);
+                        }
+
+                        productDto.Name = model.Name;
+                        productDto.Photo = model.Photo;
+                        productDto.Price = model.Price;
+                        productDto.LastUpdate = DateTime.Now;
+
                         using (var httpClient = new HttpClient())
                         {
-                            var url = string.Format("https://localhost:44331/api/product/add");
-                            
-                            var productDto = new ProductDto();
-                            productDto.Name = model.Name;
-                            productDto.Photo = model.Photo;
-                            productDto.Price = model.Price;
-                            productDto.LastUpdate = DateTime.Now;
-
+                            var url = string.Format(Constants.BaseUrl + "/add");                           
                             StringContent content = new StringContent(JsonConvert.SerializeObject(productDto), Encoding.UTF8, "application/json");
-
                             using (var response = await httpClient.PostAsync(url , content))
                             {
-
                                 if (response.IsSuccessStatusCode)
                                 {
                                     string apiResponse = await response.Content.ReadAsStringAsync();
@@ -100,10 +137,37 @@ namespace CleanArch.Web.Controllers
                     }
                     else
                     {
+                        if (Request.Form.Files?.Count > 0)
+                        {
+                            model.Photo = await SaveFile(Request.Form.Files["photo"] , true , model.Photo);
+                        }
 
+                        productDto.Name = model.Name;
+                        productDto.Photo = model.Photo;
+                        productDto.Price = model.Price;
+                        productDto.LastUpdate = DateTime.Now;
+                        productDto.Id = model.Id;
+
+                        using (var httpClient = new HttpClient())
+                        {
+                            var url = string.Format(Constants.BaseUrl + "/update");
+                            StringContent content = new StringContent(JsonConvert.SerializeObject(productDto), Encoding.UTF8, "application/json");
+                            using (var response = await httpClient.PutAsync(url, content))
+                            {
+                                if (response.IsSuccessStatusCode)
+                                {
+                                    string apiResponse = await response.Content.ReadAsStringAsync();
+                                }
+                                else
+                                {
+                                    return View(model);
+                                }
+                            }
+                        }
                     }
+                    return RedirectToAction("Index", "Home");
                 }
-                return RedirectToAction("Index", "Home");
+                return View(model);
             }
             catch(Exception ex)
             {
@@ -120,6 +184,47 @@ namespace CleanArch.Web.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+
+        private async Task<string> SaveFile(IFormFile file, bool deleteOld = false, string oldFileName = null)
+        {
+            if (file != null && file.Length > 0)
+            {
+                //Delete the old file (used by Edit action)
+                if (deleteOld && !string.IsNullOrEmpty(oldFileName))
+                {
+                    DeleteFile(oldFileName);
+                }
+
+                //Save the uploaded file
+
+                //  Read the file content
+                var contentBytes = new byte[file.Length];
+
+                file.OpenReadStream().Read(contentBytes, 0, contentBytes.Length);
+
+
+                //  Determine the file path
+                var newFileName = $"{Guid.NewGuid()}{SysIO.Path.GetExtension(file.FileName)}";
+
+                var path = $"{_hostEnvironment.WebRootPath}{Constants.ProductUploadDirectory.Replace('/', '\\')}{newFileName}";
+
+                //  Write the file to the disk
+                await SysIO.File.WriteAllBytesAsync(path, contentBytes);
+
+                return newFileName;
+            }
+            return oldFileName;
+        }
+
+        private void DeleteFile(string fileName)
+        {
+            try
+            {
+                SysIO.File.Delete($"{_hostEnvironment.WebRootPath}{Constants.ProductUploadDirectory.Replace('/', '\\')}{fileName}");
+            }
+            catch { }
         }
     }
 }
