@@ -169,7 +169,18 @@
     }
 
     function ExportToExcel() {
-        alert('Export Excel func');
+        console.log('click')
+        $.ajax({
+            url: "/Home/ExportToExcel",
+            type: "GET",
+            success: function ()
+            {
+
+            },
+            error: function () {
+                alert('Can Not Export Excel');
+            }
+        })
     }
 </script>
 

@@ -17,6 +17,8 @@ using Microsoft.AspNetCore.Hosting;
 using SysIO = System.IO;
 using CleanArch.Common.Helper;
 using AutoMapper;
+using System.IO;
+using OfficeOpenXml;
 
 namespace CleanArch.Web.Controllers
 {
@@ -200,6 +202,45 @@ namespace CleanArch.Web.Controllers
                 TempData[Constants.ErrorMessage] = Constants.ErrorMsg;
             }
             return RedirectToAction("Index", "Home");
+        }
+
+
+        public async Task<ActionResult> ExportToExcel()
+        {
+            var products = new List<Product>();
+            try
+            {
+                using (var httpClient = new HttpClient())
+                {
+                    var url = string.Format(Constants.BaseUrl + "/GetProductsExcel");
+                    using (var response = await httpClient.GetAsync(url))
+                    {
+                        if (response.IsSuccessStatusCode)
+                        {
+                            string apiResponse = await response.Content.ReadAsStringAsync();
+                            products = (JsonConvert.DeserializeObject<List<Product>>(apiResponse));
+                        }
+                    }
+                }
+
+                var stream = new MemoryStream();
+                using (var package = new ExcelPackage(stream))
+                {
+                    var workSheet = package.Workbook.Worksheets.Add("Sheet1");
+                    workSheet.Cells.LoadFromCollection(products, true);
+                    package.Save();
+                }
+                stream.Position = 0;
+                string excelName = $"ProductList-{DateTime.Now.ToString("yyyyMMddHHmmssfff")}.xlsx";
+
+                //return File(stream, "application/octet-stream", excelName);  
+                return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", excelName);
+            }
+            catch(Exception ex)
+            {
+                TempData[Constants.ErrorMessage] = Constants.ErrorMsg;
+                return RedirectToAction("Index", "Home");
+            }
         }
 
         #region Private Methods

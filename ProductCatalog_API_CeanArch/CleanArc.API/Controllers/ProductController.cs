@@ -40,7 +40,7 @@ namespace CleanArc.API.Controllers
         {
             try
             {
-                var productList = _productService.Search(start, length, name, price, lastUpdate);
+                var productList = _productService.Search(name, price, lastUpdate);
                 return Ok(productList);
             }
             catch(Exception ex)
@@ -49,6 +49,19 @@ namespace CleanArc.API.Controllers
             }
         }
 
+        [HttpGet("GetProductsExcel")]
+        public ActionResult<ICollection<ProductModel>> Get()
+        {
+            try
+            {
+                var productList = _productService.Search(null, null, null);
+                return Ok(productList);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Database Failure");
+            }
+        }
 
 
         /// <summary>
