@@ -2491,6 +2491,16 @@
           "lib/netstandard2.0/X.PagedList.Web.Common.dll": {}
         }
       },
+      "CleanArch.Common/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "compile": {
+          "bin/placeholder/CleanArch.Common.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/CleanArch.Common.dll": {}
+        }
+      },
       "CleanArch.Models/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v3.1",
@@ -7800,6 +7810,11 @@
         "x.pagedlist.web.common.nuspec"
       ]
     },
+    "CleanArch.Common/1.0.0": {
+      "type": "project",
+      "path": "../CleanArch.Common/CleanArch.Common.csproj",
+      "msbuildProject": "../CleanArch.Common/CleanArch.Common.csproj"
+    },
     "CleanArch.Models/1.0.0": {
       "type": "project",
       "path": "../CleanArch.Models/CleanArch.Models.csproj",
@@ -7808,6 +7823,7 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
+      "CleanArch.Common >= 1.0.0",
       "CleanArch.Models >= 1.0.0",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 3.1.4",
       "X.PagedList.Mvc.Core >= 8.0.7"
@@ -7846,6 +7862,9 @@
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
+            "G:\\EVision Task\\ProductCatalog_API_CeanArch\\CleanArch.Common\\CleanArch.Common.csproj": {
+              "projectPath": "G:\\EVision Task\\ProductCatalog_API_CeanArch\\CleanArch.Common\\CleanArch.Common.csproj"
+            },
             "G:\\EVision Task\\ProductCatalog_API_CeanArch\\CleanArch.Models\\CleanArch.Models.csproj": {
               "projectPath": "G:\\EVision Task\\ProductCatalog_API_CeanArch\\CleanArch.Models\\CleanArch.Models.csproj"
             }

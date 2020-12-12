@@ -120,3 +120,4 @@ G:\EVision Task\ProductCatalog_API_CeanArch\CleanArch.Web\obj\Debug\netcoreapp3.
 G:\EVision Task\ProductCatalog_API_CeanArch\CleanArch.Web\obj\Debug\netcoreapp3.1\CleanArch.Web.dll
 G:\EVision Task\ProductCatalog_API_CeanArch\CleanArch.Web\obj\Debug\netcoreapp3.1\CleanArch.Web.pdb
 G:\EVision Task\ProductCatalog_API_CeanArch\CleanArch.Web\obj\Debug\netcoreapp3.1\CleanArch.Web.genruntimeconfig.cache
+G:\EVision Task\ProductCatalog_API_CeanArch\CleanArch.Web\obj\Debug\netcoreapp3.1\Razor\Views\Home\_ProductForm.cshtml.g.cs

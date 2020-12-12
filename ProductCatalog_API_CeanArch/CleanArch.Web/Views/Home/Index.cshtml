@@ -1,4 +1,4 @@
-﻿@model CleanArch.Web.Models.ProductViewModel
+﻿@model CleanArch.Web.Models.ProductListViewModel
 @using X.PagedList.Mvc.Core;
 
 @{
@@ -15,7 +15,7 @@
         <div class="kt-portlet__head-toolbar">
             <div class="kt-portlet__head-wrapper">
                 <div class="kt-portlet__head-actions">
-                    <a href="@Url.Content("~/Home/Create")" class="btn btn-brand btn-icon-sm">
+                    <a href="@Url.Content("~/Home/Create")" class="btn btn-success btn-icon-sm">
                         <i class="la la-plus"></i>
                         Create Product
                     </a>
@@ -42,14 +42,8 @@
             </div>
 
             <div class="col-md-3">
-                <div class="row form-group">
-                    <div class="col-md-3">
-                        <button class="btn btn-primary" onclick="">Search</button>
-                    </div>
-                    <div class="col-md-3">
-                        <button class="btn btn-danger" onclick="">Reset</button>
-                    </div>
-                </div>
+                <button class="btn btn-primary" onclick="">Search</button>
+                <button class="btn btn-danger" onclick="">Reset</button>
             </div>
         </div>
 
@@ -80,12 +74,12 @@
                                     <td>@item.Price</td>
                                     <td>@item.LastUpdate</td>
                                     <td>
-                                        <a href="@Url.Content($"~/Home/Edit/{item.Id}")" class="btn btn-sm btn-clean btn-icon btn-icon-md">
-                                            <i class="la la-edit"></i>
+                                        <a href="@Url.Content($"~/Home/Edit/{item.Id}")" class="btn btn-sm btn-success btn-icon btn-icon-md">
+                                            Edit
                                         </a>
 
-                                        <a href="#" class="btn btn-sm btn-clean btn-icon btn-icon-md" data-toggle="modal" data-target="#kt_modal_3" onclick="setDeletedItemId('@item.Id')" data-bind="@item.Id">
-                                            <i class="la la-trash"></i>
+                                        <a href="#" class="btn btn-sm btn-danger btn-icon btn-icon-md" data-toggle="modal" data-target="#kt_modal_3" onclick="setDeletedItemId('@item.Id')" data-bind="@item.Id">
+                                            Delete
                                         </a>
 
                                     </td>

@@ -10,6 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CleanArch.Common\CleanArch.Common.csproj" />
     <ProjectReference Include="..\CleanArch.Models\CleanArch.Models.csproj" />
   </ItemGroup>
 

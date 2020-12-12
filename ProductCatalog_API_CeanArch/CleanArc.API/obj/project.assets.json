@@ -1269,6 +1269,16 @@
           "bin/placeholder/CleanArc.Context.dll": {}
         }
       },
+      "CleanArch.Common/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "compile": {
+          "bin/placeholder/CleanArch.Common.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/CleanArch.Common.dll": {}
+        }
+      },
       "CleanArch.Models/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v3.1",
@@ -4977,6 +4987,11 @@
       "path": "../CleanArc.Context/CleanArc.Context.csproj",
       "msbuildProject": "../CleanArc.Context/CleanArc.Context.csproj"
     },
+    "CleanArch.Common/1.0.0": {
+      "type": "project",
+      "path": "../CleanArch.Common/CleanArch.Common.csproj",
+      "msbuildProject": "../CleanArch.Common/CleanArch.Common.csproj"
+    },
     "CleanArch.Models/1.0.0": {
       "type": "project",
       "path": "../CleanArch.Models/CleanArch.Models.csproj",
@@ -4995,6 +5010,7 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
+      "CleanArch.Common >= 1.0.0",
       "CleanArch.Services >= 1.0.0"
     ]
   },
@@ -5031,6 +5047,9 @@
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
+            "G:\\EVision Task\\ProductCatalog_API_CeanArch\\CleanArch.Common\\CleanArch.Common.csproj": {
+              "projectPath": "G:\\EVision Task\\ProductCatalog_API_CeanArch\\CleanArch.Common\\CleanArch.Common.csproj"
+            },
             "G:\\EVision Task\\ProductCatalog_API_CeanArch\\CleanArch.Services\\CleanArch.Services.csproj": {
               "projectPath": "G:\\EVision Task\\ProductCatalog_API_CeanArch\\CleanArch.Services\\CleanArch.Services.csproj"
             }
