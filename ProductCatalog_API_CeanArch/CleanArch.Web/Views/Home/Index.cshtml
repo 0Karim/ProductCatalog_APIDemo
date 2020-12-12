@@ -29,6 +29,7 @@
                         <i class="la la-plus"></i>
                         Create Product
                     </a>
+                    <button class="btn btn-success" onclick="ExportToExcel()">Export Excel</button>
                 </div>
             </div>
         </div>
@@ -52,8 +53,8 @@
             </div>
 
             <div class="col-md-3">
-                <button class="btn btn-primary" onclick="">Search</button>
-                <button class="btn btn-danger" onclick="">Reset</button>
+                <button class="btn btn-primary" onclick="Search()">Search</button>
+                <button class="btn btn-danger" onclick="ResetSearch()">Reset</button>
             </div>
         </div>
 
@@ -139,23 +140,36 @@
     <!--end::Modal-->
 </div>
 
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script>
 
     $("document").ready(function () {
-
-
-
     });
 
-    function resetSearchElements()
+    function setDeletedItemId(itemId) {
+        $('#lnkModelDelete').attr('href', '/Home/Delete/' + itemId);
+    }
+
+    function ResetSearch()
     {
+        $('.form-control').val('');
         var pageSize = $('#PageSize').val();
         $('#divList').load('@Url.Content("~/Home/Index")?pageSize=' + pageSize + ' #divList');
     }
 
     function Search()
     {
-        alert('search');
+        var name = $('#name').val();
+        var price = $('#price').val();
+        var lastUpdate = $('#lastUpdate').val();
+        var pageSize = $('#PageSize').val();
+
+        var url = encodeURI('@Url.Content("~/Home/Index")?name=' + name + "&price=" + price + "&lastUpdate=" + lastUpdate + '&pageSize=' + pageSize);
+        $('#divList').load(url + ' #divList');
+    }
+
+    function ExportToExcel() {
+        alert('Export Excel func');
     }
 </script>
 

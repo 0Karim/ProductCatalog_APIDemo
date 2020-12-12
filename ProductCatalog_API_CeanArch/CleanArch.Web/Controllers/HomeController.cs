@@ -16,16 +16,19 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Hosting;
 using SysIO = System.IO;
 using CleanArch.Common.Helper;
+using AutoMapper;
 
 namespace CleanArch.Web.Controllers
 {
     public class HomeController : Controller
     {
         private readonly IWebHostEnvironment _hostEnvironment;
+        private readonly IMapper _mapper;
 
-        public HomeController(IWebHostEnvironment hostEnvironment)
+        public HomeController(IWebHostEnvironment hostEnvironment , IMapper mapper)
         {
             _hostEnvironment = hostEnvironment;
+            _mapper = mapper;
         }
 
         public async Task<IActionResult> Index(int page = 1, string name="", double? price = null , DateTime? lastUpdate = null, int? pageSize = Constants.PageSize)
@@ -75,11 +78,8 @@ namespace CleanArch.Web.Controllers
                         {
                             string apiResponse = await response.Content.ReadAsStringAsync();
                             var dto = (JsonConvert.DeserializeObject<ProductDto>(apiResponse));
-                            product.Name = dto.Name;
-                            product.Photo = dto.Photo;
-                            product.Price = dto.Price;
-                            product.LastUpdate = dto.LastUpdate;
-                            product.Id = dto.Id;
+
+                            product = _mapper.Map<ProductViewModel>(dto);
                         }
                     }
                 }
@@ -100,6 +100,9 @@ namespace CleanArch.Web.Controllers
                 if (ModelState.IsValid)
                 {
                     var productDto = new ProductDto();
+
+                    #region Add 
+
                     if (model.Id == 0)
                     {
 
@@ -108,10 +111,8 @@ namespace CleanArch.Web.Controllers
                             model.Photo = await SaveFile(Request.Form.Files["photo"]);
                         }
 
-                        productDto.Name = model.Name;
-                        productDto.Photo = model.Photo;
-                        productDto.Price = model.Price;
-                        productDto.LastUpdate = DateTime.Now;
+
+                        productDto = _mapper.Map<ProductViewModel, ProductDto>(model);
 
                         using (var httpClient = new HttpClient())
                         {
@@ -125,11 +126,17 @@ namespace CleanArch.Web.Controllers
                                 }
                                 else
                                 {
+                                    TempData[Constants.ErrorMessage] = Constants.ErrorMsg;
                                     return View(model);
                                 }
                             }
                         }
                     }
+
+                    #endregion
+
+                    #region Edit
+
                     else
                     {
                         if (Request.Form.Files?.Count > 0)
@@ -137,11 +144,7 @@ namespace CleanArch.Web.Controllers
                             model.Photo = await SaveFile(Request.Form.Files["photo"] , true , model.Photo);
                         }
 
-                        productDto.Name = model.Name;
-                        productDto.Photo = model.Photo;
-                        productDto.Price = model.Price;
-                        productDto.LastUpdate = DateTime.Now;
-                        productDto.Id = model.Id;
+                        productDto = _mapper.Map<ProductViewModel, ProductDto>(model);
 
                         using (var httpClient = new HttpClient())
                         {
@@ -155,32 +158,51 @@ namespace CleanArch.Web.Controllers
                                 }
                                 else
                                 {
+                                    TempData[Constants.ErrorMessage] = Constants.ErrorMsg;
                                     return View(model);
                                 }
                             }
                         }
                     }
+
+                    #endregion
+
+                    TempData[Constants.SuccessMessage] = Constants.SuccessMsg;
                     return RedirectToAction("Index", "Home");
                 }
                 return View(model);
             }
             catch(Exception ex)
             {
+                TempData[Constants.ErrorMessage] = Constants.ErrorMsg;
                 return View(model);
             }
         }
 
-        public IActionResult Privacy()
+        public async Task<ActionResult> Delete(int Id)
         {
-            return View();
+            try
+            {
+                using (var httpClient = new HttpClient())
+                {
+                    var url = string.Format(Constants.BaseUrl + "/delete?Id={0}", Id);
+                    using (var response = await httpClient.DeleteAsync(url))
+                    {
+                        if (response.IsSuccessStatusCode)
+                        {
+                            TempData[Constants.SuccessMessage] = Constants.SuccessMsg;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData[Constants.ErrorMessage] = Constants.ErrorMsg;
+            }
+            return RedirectToAction("Index", "Home");
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
-
+        #region Private Methods
 
         private async Task<string> SaveFile(IFormFile file, bool deleteOld = false, string oldFileName = null)
         {
@@ -220,6 +242,19 @@ namespace CleanArch.Web.Controllers
                 SysIO.File.Delete($"{_hostEnvironment.WebRootPath}{Constants.ProductUploadDirectory.Replace('/', '\\')}{fileName}");
             }
             catch { }
+        }
+
+        #endregion
+
+        public IActionResult Privacy()
+        {
+            return View();
+        }
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
 }

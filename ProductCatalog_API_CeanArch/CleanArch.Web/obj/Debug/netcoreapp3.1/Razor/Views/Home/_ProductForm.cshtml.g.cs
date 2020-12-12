@@ -33,8 +33,15 @@ using X.PagedList.Mvc.Core;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 4 "G:\EVision Task\ProductCatalog_API_CeanArch\CleanArch.Web\Views\_ViewImports.cshtml"
+using CleanArch.Common.Helper;
+
+#line default
+#line hidden
+#nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"b36314dee3c1c4abeba5cd394b7ab0ab60737731", @"/Views/Home/_ProductForm.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"df0bf4c25de8eff3573010a0ef9fc4fe6d631318", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"38e7736c2016dad5f41fcf22137c22cde17adbfc", @"/Views/_ViewImports.cshtml")]
     public class Views_Home__ProductForm : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<CleanArch.Web.Models.ProductViewModel>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("class", new global::Microsoft.AspNetCore.Html.HtmlString("btn btn-secondary"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -169,7 +176,7 @@ using X.PagedList.Mvc.Core;
                 <div class=""kt-form__actions"">
                     <button type=""submit"" class=""btn btn-success"">Save</button>
                     ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "b36314dee3c1c4abeba5cd394b7ab0ab607377319178", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "b36314dee3c1c4abeba5cd394b7ab0ab607377319374", async() => {
                 WriteLiteral("Cancel");
             }
             );

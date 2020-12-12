@@ -33,8 +33,15 @@ using X.PagedList.Mvc.Core;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 4 "G:\EVision Task\ProductCatalog_API_CeanArch\CleanArch.Web\Views\_ViewImports.cshtml"
+using CleanArch.Common.Helper;
+
+#line default
+#line hidden
+#nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"bdf25b0460b258c9abfd6cfce43569d3e93426c3", @"/Views/Home/Create.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"df0bf4c25de8eff3573010a0ef9fc4fe6d631318", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"38e7736c2016dad5f41fcf22137c22cde17adbfc", @"/Views/_ViewImports.cshtml")]
     public class Views_Home_Create : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<CleanArch.Web.Models.ProductViewModel>
     {
         #pragma warning disable 1998

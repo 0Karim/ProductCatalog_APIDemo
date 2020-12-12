@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using CleanArc.API.Models;
-using CleanArc.API.Models.Shared;
 using CleanArch.Common.Dtos;
 using CleanArch.Models.Entities;
 using CleanArch.Services.Interfaces;
@@ -18,10 +18,12 @@ namespace CleanArc.API.Controllers
     {
 
         private readonly IProductService _productService;
+        private readonly IMapper _mapper;
 
-        public ProductController(IProductService productService)
+        public ProductController(IProductService productService, IMapper mapper)
         {
             _productService = productService;
+            _mapper = mapper;
         }
 
         [HttpGet("search")]
@@ -51,14 +53,8 @@ namespace CleanArc.API.Controllers
 
                 var product = _productService.GetProductById(Id);
                 var productDto = new ProductDto();
-                
-                productDto.Id = product.Id;
-                productDto.Name = product.Name;
-                productDto.Photo = product.Photo;
-                productDto.Price = product.Price;
-                productDto.LastUpdate = product.LastUpdate;
 
-
+                productDto = _mapper.Map<Product , ProductDto>(product);
                 return Ok(productDto);
             }
             catch (Exception ex)
@@ -77,10 +73,7 @@ namespace CleanArc.API.Controllers
                     return BadRequest();
 
                 var entity = new Product();
-                entity.Name = product.Name;
-                entity.Price = product.Price;
-                entity.Photo = product.Photo;
-                entity.LastUpdate = product.LastUpdate;
+                entity = _mapper.Map<ProductDto , Product>(product);
 
                 var success = _productService.Add(entity);
 
